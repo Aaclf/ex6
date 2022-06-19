@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}前往登录{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+    <div class="card text-light bg-dark" style="margin-top: 50px; margin-left: 24rem; width: 18rem; height: 10rem">
+        <div class="card-body">
+            <h5 class="card-title">注意!</h5>
+            <p class="card-text">你还没有登录，请先登录再访问</p>
+            <div style="text-align: right">
+                <a href="{{ url_for('user.login') }}" class="btn btn-outline-success">前往登录</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

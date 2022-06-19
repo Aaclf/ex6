@@ -1,0 +1,19 @@
+.question-ul-1 li{
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+    background-color: #343a40;
+    border-bottom: 1px solid #eee;
+    list-style: none;
+}
+.question-main-1{
+    float: left;
+    overflow: auto;
+    display: flex;
+}
+.python_file{
+    width: 600px;
+    height: 300px;
+    margin-left: -40px;
+    margin-top: 20px;
+}

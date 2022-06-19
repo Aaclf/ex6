@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename = 'img/house-door.svg') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename = 'img/house-door.svg') }}" type="image/x-icon">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='bootstrap/bootstrap_4.6.min.css') }} ">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/init.css') }} ">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    {% block head %}{% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container">
+        <a class="navbar-brand mr-5" href="#" id="tc" style="margin-left: -3rem">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-book"
+                 viewBox="0 0 16 16">
+                <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+            </svg>
+            背包问题知识社区</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav  mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link text-light" href="/" id="nl1">首页<span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{{ url_for('qa.public_question') }}" id="nl1">发布</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-expanded="false"
+                       id="nl1">
+                        资源
+                    </a>
+                    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item text-light" href="#">Java文档</a>
+                        <a class="dropdown-item text-light" href="#">C/C++文档</a>
+                        {#                        <div class="dropdown-divider"></div>#}
+                        <a class="dropdown-item text-light" href="{{ url_for('qa.python_file') }}">Python文档</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" id="nl1" href="{{ url_for('qa.course') }}">教程</a>
+                </li>
+                <li class="nav-item ml-4">
+                    <form class="form-inline my-2 my-lg-0" method="GET" action="{{ url_for('qa.search') }}">
+                        <input class="form-control mr-sm-2" type="search" placeholder="关键字" aria-label="Search" name="q">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                    </form>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                {% if user %}
+                    <li class="nav-item mr-5">
+                        <a class="nav-link text-light" href="{{ url_for('user.user_center') }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-person" viewBox="0 0 16 16">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4
+                                8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516
+                                10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                            </svg>
+                            {{ user.username }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url_for('user.logout') }}" style="margin-right: -3rem">注销</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url_for('user.login') }}">登录</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container text-white">{% block body %}{% endblock %}</div>
+
+<script src="{{ url_for('static', filename='jquery/jquery.3.6.min.js') }}"></script>
+<script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
+
+</body>
+</html>

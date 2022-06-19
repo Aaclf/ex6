@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% from 'macro.html' import pagination_show %}
+
+{% block title %}问答首页{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-8" style="margin-top: 30px;">
+            <h3 style="margin-left: 10px;">文章:</h3>
+            <ul class="question-ul" style="margin-left: -30px;">
+                {% for question in questions %}
+                    <li>
+                        <div class="side-question">
+                            <img class="side-question-avatar" src="/static/img/{{ question.author_id }}.jpg"
+                                 alt="">
+                        </div>
+                        <div class="question-main">
+                            <div class="question-title"><a href="{{ url_for('qa.question_detail',
+                                    question_id = question.id) }}">{{ question.title }}</a></div>
+                            <div class="question-content">{{ question.content }}</div>
+                            <div class="question-detail">
+                                <small class="question-author">{{ question.author.username }}</small>
+                                <small class="question-time">{{ question.create_time }}</small>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col">
+            <div>
+                <h3 style="margin-top: 30px;">智能社区
+                    <button type="button" class="btn btn-outline-dark" style="margin-left: 170px;">更多</button>
+                </h3>
+            </div>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                       aria-controls="nav-home" aria-selected="true">社区达人</a>
+                    <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                       aria-controls="nav-profile" aria-selected="false">讨论区</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                     aria-labelledby="nav-home-tab">
+                    <ul class="question-ul-1" style="margin-left: -30px;">
+                        {% for user in users %}
+                            <li>
+                                <div class="side-question">
+                                    <img class="side-question-avatar"
+                                         src="/static/img/{{ user.id }}.jpg" alt="">
+                                </div>
+                                <div class="question-main-1">
+                                    <div class="question-title"><a href="{{ url_for('user.user_center') }}">
+                                        {{ user.username }}</a></div>
+                                    <div style="margin-left: 220px;">
+                                        <button type="button" class="btn btn-outline-warning badge badge-dark">关注
+                                        </button>
+                                    </div>
+
+                                    {#                                    <div class="question-content">{{ question.content }}</div>#}
+                                    {#                                    <div class="question-detail">#}
+                                    {#                                        <button type="button" class="btn btn-outline-warning badge badge-dark">关注</button>#}
+                                    {#                                    </div>#}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="">111</div>
+                    <div class="input-group mb-3" style="top: 338px;">
+                        <input type="text" class="form-control" placeholder=""
+                               aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">发送</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-left: -160px;">
+        {{ pagination_show(pagination, 'qa.index') }}
+    </div>
+
+{% endblock %}

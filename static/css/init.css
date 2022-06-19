@@ -1,0 +1,36 @@
+body{
+    background-color: #23272b;
+    color: white;
+}
+
+.navbar-brand{
+    font-weight: bolder;
+    font-family: "黑体";
+}
+
+#nl1:hover{
+    background-color: #485F6E;
+    border-radius: 5px;
+}
+
+#nl1:active{
+    background-color: #485F6E;
+}
+
+#tc{
+    color: white;
+}
+
+.page-link{
+    background-color: #23272b;
+    color: white;
+}
+
+.page-link:hover{
+    color: #1e7e34;
+    background-color: #86989B;
+}
+
+.dropdown-item:hover{
+    background-color: #485F6E;
+}
